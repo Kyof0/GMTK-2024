@@ -47,3 +47,6 @@ TagManager:
   - name: Decoration
     uniqueID: 105290047
     locked: 0
+  - name: Minions
+    uniqueID: 166304441
+    locked: 0

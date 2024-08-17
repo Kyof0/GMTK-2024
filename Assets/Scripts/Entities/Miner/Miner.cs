@@ -34,7 +34,7 @@ namespace Entities.Miner
         {
             base.Start();
             
-            StateMachine.Initialize(WaitState);
+            StateMachine.Initialize(MoveState);
         }
 
         #endregion

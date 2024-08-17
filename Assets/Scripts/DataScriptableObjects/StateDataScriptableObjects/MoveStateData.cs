@@ -7,5 +7,6 @@ namespace DataScriptableObjects.StateDataScriptableObjects
     public class MoveStateData : StateData
     {
         public float movementSpeed;
+        public float moveTime;
     }
 }

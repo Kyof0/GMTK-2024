@@ -13,6 +13,8 @@ namespace CoreSystem.CoreComponents
 
         private Vector2 _workspace; // So that we don't create a new Vector2 every time we set the velocity
 
+        public int facingDirection;
+
         #endregion
 
         #region Unity Callback Functions
@@ -38,6 +40,11 @@ namespace CoreSystem.CoreComponents
         {
             _workspace = Vector2.zero;
             Rb.velocity = _workspace;
+        }
+
+        public void Flip()
+        {
+            
         }
 
         #endregion

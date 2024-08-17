@@ -1,5 +1,6 @@
 ﻿using DataScriptableObjects;
 using Entities;
+using UnityEngine;
 
 namespace StateMachine.Specific
 {
@@ -18,14 +19,21 @@ namespace StateMachine.Specific
         {
             base.Enter();
             
-            entity.anim.SetBool(animBoolName, true);
+            // entity.anim.SetBool(animBoolName, true);
         }
 
         public override void Exit()
         {
             base.Exit();
             
-            entity.anim.SetBool(animBoolName, false);
+            // entity.anim.SetBool(animBoolName, false);
+        }
+
+        public override void LogicUpdate()
+        {
+            base.LogicUpdate();
+            
+            Debug.Log(animBoolName);
         }
     }
 }

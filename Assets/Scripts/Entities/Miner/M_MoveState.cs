@@ -21,14 +21,14 @@ namespace Entities.Miner
         {
             base.LogicUpdate();
 
-            if (direction == Vector2.zero) StateMachine.ChangeState(entity.WaitState);
+            if (Time.time > stateData.moveTime + startTime) StateMachine.ChangeState(entity.WaitState);
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
             
-            if(direction != Vector2.zero) entity.Movement.Move(stateData.movementSpeed, direction);
+            entity.Movement.Move(stateData.movementSpeed, entity.Movement.facingDirection * Vector2.right);
         }
 
         public override void DoChecks()
