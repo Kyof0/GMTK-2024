@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: M_MoveData
   m_EditorClassIdentifier: 
   movementSpeed: 10
+  moveTime: 3
