@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11911e161c134f159f61651171503f91, type: 3}
   m_Name: S_MoveData
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  moveTime: 0
+  movementSpeed: 4
+  moveTime: 4
