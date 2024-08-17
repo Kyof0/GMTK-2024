@@ -1,6 +1,6 @@
 ﻿using System;
 using CoreSystem;
-using Data;
+using DataScriptableObjects;
 using StateMachine;
 using UnityEngine;
 

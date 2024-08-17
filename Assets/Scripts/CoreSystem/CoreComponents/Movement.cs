@@ -31,6 +31,13 @@ namespace CoreSystem.CoreComponents
         public void Move(float velocity, Vector2 direction)
         {
             _workspace = velocity * direction;
+            Rb.velocity = _workspace;
+        }
+
+        public void Stop()
+        {
+            _workspace = Vector2.zero;
+            Rb.velocity = _workspace;
         }
 
         #endregion

@@ -1,4 +1,4 @@
-﻿using Data;
+﻿using DataScriptableObjects;
 using Entities;
 
 namespace StateMachine.Specific

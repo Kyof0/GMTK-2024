@@ -28,6 +28,13 @@ namespace CoreSystem.CoreComponents
 
         private void Update()
         {
+            if(_path == null) return;
+            
+            if (_path.vectorPath.Count <= _currentWayPoint + 1)
+            {
+                direction = Vector2.zero;
+                return;
+            }
             if ((_path.vectorPath[_currentWayPoint + 1] - transform.position).magnitude < 0.3f) _currentWayPoint++;
         }
 

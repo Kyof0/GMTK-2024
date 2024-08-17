@@ -1,4 +1,4 @@
-﻿using Data;
+﻿using DataScriptableObjects;
 using Entities;
 using UnityEngine;
 
@@ -10,6 +10,7 @@ namespace StateMachine
 
         protected readonly Entity Entity;
         protected readonly StateData StateData;
+        protected FiniteStateMachine StateMachine;
 
         protected float startTime;
 
@@ -19,6 +20,7 @@ namespace StateMachine
         {
             this.Entity = entity;
             this.StateData = stateData;
+            this.StateMachine = entity.StateMachine;
         }
 
         #region Unity Callback Functions
