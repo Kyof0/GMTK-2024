@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Animals
-    uniqueID: 2895481901
+  - name: Ground
+    uniqueID: 1239447917
+    locked: 0
+  - name: Decoration
+    uniqueID: 105290047
     locked: 0
