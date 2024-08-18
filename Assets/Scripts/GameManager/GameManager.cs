@@ -12,6 +12,14 @@ namespace GameManager
         public Light2D GlobalLight => GlobalLightGameObject.GetComponent<Light2D>();
 
         public AnimationCurve DayCycle;
+
+        private bool done;
+
+        public GameObject miner;
+        
+        private float _lastSpawnTime;
+
+        private int count = 1;
         private void Update()
         {
             GlobalLight.intensity = DayCycle.Evaluate((Time.time / 60) % 1f) + 0.2f;
@@ -21,6 +29,7 @@ namespace GameManager
                 foreach (var spotLight in SpotLights)
                 {
                     spotLight.GetComponent<Light2D>().intensity = 0f;
+                    OnDawn?.Invoke();
                 }
             }
             else
@@ -28,8 +37,12 @@ namespace GameManager
                 foreach (var spotLight in SpotLights)
                 {
                     spotLight.GetComponent<Light2D>().intensity = 1f;
+                    OnDusk?.Invoke();
                 }
             }
         }
+
+        public event Action OnDusk;
+        public event Action OnDawn;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using OldSystem.DataScriptableObjects;
 using OldSystem.DataScriptableObjects.EntityDataScriptableObjects;
 using Pathfinding;
@@ -11,6 +12,9 @@ namespace Entities.People
         private Rigidbody2D _rb;
 
         public MinionData _data;
+
+        private GameObject _gameManagerObject;
+        private GameManager.GameManager _gameManager;
 
         #region State Parameters
 
@@ -38,63 +42,140 @@ namespace Entities.People
 
         #endregion
 
+        
+        private enum State
+        {
+            GoMining,
+            WorkInMines,
+            GoHome,
+            WorkAtHome
+        }
+
+        private State _currentState = State.GoHome;
+
+        #region GoMining State
+
+        private void EnterGoMining()
+        {
+            FindPath(target1);
+        }
+
+        private void UpdateGoMining()
+        {
+            _rb.velocity = FindDirection() * 10;
+        }
+
+        private void ExitGoMining()
+        {
+            
+        }
+
+        #endregion
+        
+        #region WorkInMines State
+
+        private void EnterWorkInMines()
+        {
+            
+        }
+
+        private void UpdateWorkInMines()
+        {
+            
+        }
+
+        private void ExitWorkInMines()
+        {
+            
+        }
+
+        #endregion
+        
+        #region GoHome State
+
+        private void EnterGoHome()
+        {
+            FindPath(target2);
+        }
+
+        private void UpdateGoHome()
+        {
+            _rb.velocity = FindDirection() * 10;
+        }
+
+        private void ExitGoHome()
+        {
+            
+        }
+
+        #endregion
+        
+        #region WorkAtHome State
+
+        private void EnterWorkAtHome()
+        {
+            
+        }
+
+        private void UpdateWorkAtHome()
+        {
+            
+        }
+
+        private void ExitWorkAtHome()
+        {
+            
+        }
+
+        #endregion
+        private void Awake()
+        {
+            _gameManagerObject = GameObject.FindGameObjectWithTag("GameController");
+            _gameManager = _gameManagerObject.GetComponent<GameManager.GameManager>();
+            _gameManager.OnDawn += HandleOnDawn;
+            _gameManager.OnDusk += HandleOnDusk;
+        }
+
+        private void OnDestroy()
+        {
+            _gameManager.OnDawn -= HandleOnDawn;
+            _gameManager.OnDusk -= HandleOnDusk;
+        }
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
             _seeker = GetComponent<Seeker>();
-            
-            FindPath(target1);
-
-            _goMining = true;
-            _mine = false;
-            _goHome = false;
-            _transfer = false;
         }
 
         private void Update()
         {
-            var direction = FindDirection();
-
-            if (_goMining && _reachedDestination)
+            switch (_currentState)
             {
-                _goMining = false;
-                _mine = true;
-                
-                FindPath(target2);
-
-                _reachedDestination = false;
-
-                _startTime = Time.time;
+                case State.GoMining:
+                    UpdateGoMining();
+                    break;
+                case State.WorkInMines:
+                    UpdateWorkInMines();
+                    break;
+                case State.GoHome:
+                    UpdateGoHome();
+                    break;
+                case State.WorkAtHome:
+                    UpdateWorkInMines();
+                    break;
             }
-
-            if (_mine && Time.time > _data.mineTime + _startTime)
-            {
-                _mine = false;
-                _goHome = true;
-            }
-            
-            if (_goHome && _reachedDestination)
-            {
-                _goHome = false;
-                _transfer = true;
-                
-                FindPath(target1);
-
-                _reachedDestination = false;
-
-                _startTime = Time.time;
-            }
-
-            if (_transfer && Time.time > _data.transferTime + _startTime)
-            {
-                _transfer = false;
-                _goMining = true;
-            }
-
-            if (_goMining || _goHome) _rb.velocity = direction * _data.moveSpeed;
-            else _rb.velocity = Vector2.zero;
         }
 
+        private void HandleOnDawn()
+        {
+            SwitchState(State.GoMining);
+        }
+
+        private void HandleOnDusk()
+        {
+            SwitchState(State.GoHome);
+        }
 
         #region Pathfinding
 
@@ -129,5 +210,42 @@ namespace Entities.People
         }
 
         #endregion
+
+        private void SwitchState(State state)
+        {
+            switch (_currentState)
+            {
+                case State.GoMining:
+                    ExitGoMining();
+                    break;
+                case State.WorkInMines:
+                    ExitWorkInMines();
+                    break;
+                case State.GoHome:
+                    ExitGoHome();
+                    break;
+                case State.WorkAtHome:
+                    ExitWorkAtHome();
+                    break;
+            }
+            
+            switch (state)
+            {
+                case State.GoMining:
+                    EnterGoMining();
+                    break;
+                case State.WorkInMines:
+                    EnterWorkInMines();
+                    break;
+                case State.GoHome:
+                    EnterGoHome();
+                    break;
+                case State.WorkAtHome:
+                    EnterWorkAtHome();
+                    break;
+            }
+
+            _currentState = state;
+        }
     }
 }
