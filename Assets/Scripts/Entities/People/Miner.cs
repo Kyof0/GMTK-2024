@@ -4,45 +4,26 @@ using OldSystem.DataScriptableObjects;
 using OldSystem.DataScriptableObjects.EntityDataScriptableObjects;
 using Pathfinding;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities.People
 {
     public class Miner : MonoBehaviour
     {
+        #region Data and Components
+
+        public MinionData data;
+        
         private Rigidbody2D _rb;
 
-        public MinionData _data;
-
-        private GameObject _gameManagerObject;
-        private GameManager.GameManager _gameManager;
+        #endregion
 
         #region State Parameters
 
-        private bool _goMining;
-        private bool _mine;
-        private bool _goHome;
-        private bool _transfer;
+        private State _currentState;
 
         private float _startTime;
 
-        #endregion
-        
-        #region Pathfinding Parameters
-
-        private Seeker _seeker;
-
-        private Path _path;
-
-        private int _currentWayPoint;
-        
-        private bool _reachedDestination = false;
-
-        public Transform target1;
-        public Transform target2;
-
-        #endregion
-
-        
         private enum State
         {
             GoMining,
@@ -51,101 +32,33 @@ namespace Entities.People
             WorkAtHome
         }
 
-        private State _currentState = State.GoHome;
+        #endregion
 
-        #region GoMining State
+        #region Pathfinding Parameters
 
-        private void EnterGoMining()
-        {
-            FindPath(target1);
-        }
+        private Seeker _seeker;
 
-        private void UpdateGoMining()
-        {
-            _rb.velocity = FindDirection() * 10;
-        }
+        private Path _path;
 
-        private void ExitGoMining()
-        {
-            
-        }
+        private int _currentWayPoint;
+
+        private bool _reachedDestination = false;
+
+        public Transform target1;
+
+        public Transform target2;
 
         #endregion
-        
-        #region WorkInMines State
 
-        private void EnterWorkInMines()
-        {
-            
-        }
 
-        private void UpdateWorkInMines()
-        {
-            
-        }
-
-        private void ExitWorkInMines()
-        {
-            
-        }
-
-        #endregion
-        
-        #region GoHome State
-
-        private void EnterGoHome()
-        {
-            FindPath(target2);
-        }
-
-        private void UpdateGoHome()
-        {
-            _rb.velocity = FindDirection() * 10;
-        }
-
-        private void ExitGoHome()
-        {
-            
-        }
-
-        #endregion
-        
-        #region WorkAtHome State
-
-        private void EnterWorkAtHome()
-        {
-            
-        }
-
-        private void UpdateWorkAtHome()
-        {
-            
-        }
-
-        private void ExitWorkAtHome()
-        {
-            
-        }
-
-        #endregion
-        private void Awake()
-        {
-            _gameManagerObject = GameObject.FindGameObjectWithTag("GameController");
-            _gameManager = _gameManagerObject.GetComponent<GameManager.GameManager>();
-            _gameManager.OnDawn += HandleOnDawn;
-            _gameManager.OnDusk += HandleOnDusk;
-        }
-
-        private void OnDestroy()
-        {
-            _gameManager.OnDawn -= HandleOnDawn;
-            _gameManager.OnDusk -= HandleOnDusk;
-        }
+        #region Unity Callback Functions
 
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
             _seeker = GetComponent<Seeker>();
+            
+            SwitchState(State.GoHome);
         }
 
         private void Update()
@@ -167,15 +80,7 @@ namespace Entities.People
             }
         }
 
-        private void HandleOnDawn()
-        {
-            SwitchState(State.GoMining);
-        }
-
-        private void HandleOnDusk()
-        {
-            SwitchState(State.GoHome);
-        }
+        #endregion
 
         #region Pathfinding
 
@@ -210,6 +115,8 @@ namespace Entities.People
         }
 
         #endregion
+
+        #region FSM
 
         private void SwitchState(State state)
         {
@@ -247,5 +154,83 @@ namespace Entities.People
 
             _currentState = state;
         }
+
+        #region GoMining State
+
+        private void EnterGoMining()
+        {
+            
+        }
+
+        private void UpdateGoMining()
+        {
+            _rb.velocity = Vector2.right;
+        }
+
+        private void ExitGoMining()
+        {
+            
+        }
+
+        #endregion
+
+        #region WorkInMines State
+
+        private void EnterWorkInMines()
+        {
+            
+        }
+
+        private void UpdateWorkInMines()
+        {
+            
+        }
+
+        private void ExitWorkInMines()
+        {
+            
+        }
+
+        #endregion
+
+        #region GoHome State
+
+        private void EnterGoHome()
+        {
+            
+        }
+
+        private void UpdateGoHome()
+        {
+            _rb.velocity = Vector2.left;
+        }
+
+        private void ExitGoHome()
+        {
+            
+        }
+
+        #endregion
+
+        #region WorkAtHome State
+
+        private void EnterWorkAtHome()
+        {
+            
+        }
+
+        private void UpdateWorkAtHome()
+        {
+            
+        }
+
+        private void ExitWorkAtHome()
+        {
+            
+        }
+
+        #endregion
+
+        #endregion
     }
 }
