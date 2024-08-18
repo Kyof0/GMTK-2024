@@ -44,9 +44,9 @@ namespace Entities.People
 
         private bool _reachedDestination = false;
 
-        public Transform target1;
+        private Transform target1;
 
-        public Transform target2;
+        private Transform target2;
 
         #endregion
         
@@ -58,6 +58,9 @@ namespace Entities.People
             _seeker = GetComponent<Seeker>();
             
             SwitchState(State.GoHome);
+
+            target1 = GameObject.FindGameObjectWithTag("Finish").transform;
+            target2 = GameObject.FindGameObjectWithTag("Respawn").transform;
         }
 
         private void Update()
@@ -159,11 +162,13 @@ namespace Entities.People
         private void EnterGoMining()
         {
             _startTime = Time.time;
+            
+            FindPath(target1);
         }
 
         private void UpdateGoMining()
         {
-            _rb.velocity = Vector2.right;
+            _rb.velocity = FindDirection();
             
             if (Time.time > _startTime + data.transferTime) SwitchState(State.GoHome);
         }
