@@ -49,8 +49,7 @@ namespace Entities.People
         public Transform target2;
 
         #endregion
-
-
+        
         #region Unity Callback Functions
 
         private void Start()
@@ -159,12 +158,14 @@ namespace Entities.People
 
         private void EnterGoMining()
         {
-            
+            _startTime = Time.time;
         }
 
         private void UpdateGoMining()
         {
             _rb.velocity = Vector2.right;
+            
+            if (Time.time > _startTime + data.transferTime) SwitchState(State.GoHome);
         }
 
         private void ExitGoMining()
@@ -197,12 +198,14 @@ namespace Entities.People
 
         private void EnterGoHome()
         {
-            
+            _startTime = Time.time;
         }
 
         private void UpdateGoHome()
         {
             _rb.velocity = Vector2.left;
+            
+            if (Time.time > _startTime + data.transferTime) SwitchState(State.GoMining);
         }
 
         private void ExitGoHome()
