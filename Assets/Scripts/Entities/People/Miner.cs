@@ -44,10 +44,6 @@ namespace Entities.People
 
         private bool _reachedDestination = false;
 
-        private Transform target1;
-
-        private Transform target2;
-
         #endregion
         
         #region Unity Callback Functions
@@ -58,9 +54,6 @@ namespace Entities.People
             _seeker = GetComponent<Seeker>();
             
             SwitchState(State.GoHome);
-
-            target1 = GameObject.FindGameObjectWithTag("Finish").transform;
-            target2 = GameObject.FindGameObjectWithTag("Respawn").transform;
         }
 
         private void Update()
@@ -86,6 +79,19 @@ namespace Entities.People
 
         #region Pathfinding
 
+        /// <summary>
+        /// Runs A* algorithm and saves the path in _path variable
+        /// </summary>
+        /// <param name="target"></param>
+        private void FindPath(Transform target)
+        {
+            _seeker.StartPath(transform.position, target.position, OnPathComplete);
+        }
+
+        /// <summary>
+        /// Uses the already generated path to return immediate direction to go
+        /// </summary>
+        /// <returns></returns>
         private Vector2 FindDirection()
         {
             if (_path == null || _path.vectorPath.Count <= _currentWayPoint + 1) return Vector2.zero;
@@ -102,11 +108,10 @@ namespace Entities.People
             return (_path.vectorPath[_currentWayPoint + 1] - transform.position).normalized;
         }
 
-        private void FindPath(Transform target)
-        {
-            _seeker.StartPath(transform.position, target.position, OnPathComplete);
-        }
-
+        /// <summary>
+        /// Helper function to FindPath function
+        /// </summary>
+        /// <param name="path"></param>
         private void OnPathComplete(Path path)
         {
             if (!path.error)
@@ -119,7 +124,7 @@ namespace Entities.People
         #endregion
 
         #region FSM
-
+        
         private void SwitchState(State state)
         {
             switch (_currentState)
@@ -162,13 +167,11 @@ namespace Entities.People
         private void EnterGoMining()
         {
             _startTime = Time.time;
-            
-            FindPath(target1);
         }
 
         private void UpdateGoMining()
         {
-            _rb.velocity = FindDirection();
+            _rb.velocity = Vector2.down;
             
             if (Time.time > _startTime + data.transferTime) SwitchState(State.GoHome);
         }
