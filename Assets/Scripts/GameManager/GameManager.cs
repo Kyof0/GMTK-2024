@@ -23,7 +23,7 @@ namespace GameManager
 
         private void Start()
         {
-            Instantiate(miner, transform.position, Quaternion.identity);
+            _lastSpawnTime = Time.time;
         }
 
         private void Update()
@@ -45,6 +45,12 @@ namespace GameManager
                     spotLight.GetComponent<Light2D>().intensity = 1f;
                     OnDusk?.Invoke();
                 }
+            }
+
+            if (Time.time > _lastSpawnTime + 1f)
+            {
+                Instantiate(miner, transform.position, Quaternion.identity);
+                _lastSpawnTime = Time.time;
             }
         }
 
