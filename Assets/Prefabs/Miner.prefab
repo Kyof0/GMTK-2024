@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19482fdfcce34e6cb88d3157754ea07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _data: {fileID: 11400000, guid: e5f516694e811324bb9db26001c9572b, type: 2}
+  data: {fileID: 11400000, guid: e5f516694e811324bb9db26001c9572b, type: 2}
   target1: {fileID: 0}
   target2: {fileID: 0}
 --- !u!114 &3726186597743903778
