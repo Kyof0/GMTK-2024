@@ -20,6 +20,12 @@ namespace GameManager
         private float _lastSpawnTime;
 
         private int count = 1;
+
+        private void Start()
+        {
+            Instantiate(miner, transform.position, Quaternion.identity);
+        }
+
         private void Update()
         {
             GlobalLight.intensity = DayCycle.Evaluate((Time.time / 60) % 1f) + 0.2f;
