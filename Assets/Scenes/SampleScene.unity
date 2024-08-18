@@ -482,7 +482,7 @@ GameObject:
   - component: {fileID: 216519644}
   - component: {fileID: 216519643}
   m_Layer: 5
-  m_Name: RawImage
+  m_Name: leftBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
