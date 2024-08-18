@@ -6,6 +6,8 @@ namespace OldSystem.DataScriptableObjects.EntityDataScriptableObjects
     
     public class MinionData : EntityData
     {
-        
+        public float mineTime;
+        public float transferTime;
+        public float moveSpeed;
     }
 }
