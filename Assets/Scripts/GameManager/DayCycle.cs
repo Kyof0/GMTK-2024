@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 public class DayCycle : MonoBehaviour
 {
-    public Image _cycleBar;
+    public DayCycleManager dayCycleManager;
+
 
     public float dayTime = 60;
     public bool isSecond = true;
@@ -30,11 +31,12 @@ public class DayCycle : MonoBehaviour
             else
             {
                 dayEnd = true;
+                DayEnd();
             }
         }
         else
         {
-            DayEnd();
+            Debug.Log("night time");
         }
     }
     public IEnumerator DayAndNight(float delay)
@@ -46,12 +48,12 @@ public class DayCycle : MonoBehaviour
     public void SpendTime(float time)
     {
         dayTime -= time;
-        _cycleBar.fillAmount = dayTime / 60f;
+        dayCycleManager.SpendTime(dayTime);
     }
     public void ResetTime(float time)
     {
         dayTime = time;
-        _cycleBar.fillAmount = dayTime / 60f;
+        dayCycleManager.ResetTime(dayTime);
     }
     public void DayStart()
     {
@@ -62,9 +64,15 @@ public class DayCycle : MonoBehaviour
     {
         ResetTime(60f);
         //Pause states, workers etc. 
+        dayCycleManager.ActivateEndDayButton();
         //Do actions.
         Debug.Log("Day Ended");
         dayStart = true;
+    }
+    public void EndDayButton()
+    {
+        //Start day.
+        dayCycleManager.DeactivateEndDayButton();
         dayEnd = false;
     }
 }
