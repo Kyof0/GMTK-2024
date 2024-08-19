@@ -1,9 +1,14 @@
+using Entities.People;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class AntagonistAI : MonoBehaviour {
 
+  public enum Resource { Wood, Stone, Iron, Gold, Food};
+
+  // Can change this resources class to be a dictionary<Resource, float>
   public class Resources
   {
     public float Wood { get; set; }
@@ -66,9 +71,28 @@ public abstract class AntagonistAI : MonoBehaviour {
 
   }
 
-  protected Resources resources = new Resources();
+  public Resources resources = new Resources();
 
-  protected enum MinionType { Miner, Farmer, Soldier };
+  public enum MinionType { Miner, Farmer, Soldier, LumberJack };
+  // The list should be in the same order as the enum
+  public List<GameObject> Minions;
+
+  public MinionType GetMinionType(Resource resource) 
+  {
+    switch (resource)
+    {
+      case Resource.Wood: return MinionType.LumberJack;
+      case Resource.Stone: return MinionType.Miner;
+      case Resource.Iron: return MinionType.Miner;
+      case Resource.Gold: return MinionType.Miner;
+      case Resource.Food: return MinionType.Farmer;
+      default:
+        Debug.LogError("Unknown resource");
+        return MinionType.Soldier;
+    }
+   
+  }
+
 
   // Start is called before the first frame update
   void Start() {
@@ -107,20 +131,36 @@ public abstract class AntagonistAI : MonoBehaviour {
     {
       case MinionType.Miner:
         // spawn enemy miner
-        Debug.Log("[AntagonistAI] TODO: Spawn enemy miner");
+        InstantiateMinion(Minions[(int)MinionType.Miner]);
         break;
       case MinionType.Farmer:
         // spawn enemy farmer
-        Debug.Log("[AntagonistAI] TODO: Spawn enemy farmer");
+        InstantiateMinion(Minions[(int)MinionType.Farmer]);
         break;
       case MinionType.Soldier:
         // spawn enemy soldier
-        Debug.Log("[AntagonistAI] TODO: Spawn enemy soldier");
+        InstantiateMinion(Minions[(int)MinionType.Soldier]);
         break;
       default:
         Debug.LogError("Attempted to spawn an unknown minion");
         break;
     }
+  }
+
+  private void InstantiateMinion(GameObject minion)
+  {
+    if(minion != null)
+    {
+      Instantiate(minion, transform.position, Quaternion.identity);
+    } 
+    else
+    {
+      Debug.LogError("Attempted to spawn an unassigned minion");
+    }
+    // var instance = Instantiate(minion, transform.position, Quaternion.identity);
+    // var minionScript = instance.GetComponent<Collector>();
+    // minionScript.Targets = this.targets;
+    // minionScript.GameManager = this;
   }
 
 }
