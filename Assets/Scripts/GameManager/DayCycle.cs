@@ -1,78 +1,80 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-public class DayCycle : MonoBehaviour
+
+namespace GameManager
 {
-    public DayCycleManager dayCycleManager;
-
-
-    public float dayTime = 60;
-    public bool isSecond = true;
-    public bool dayStart = true;
-    public bool dayEnd = false;
-    void Update()
+    public class EmreDayCycle : MonoBehaviour
     {
-        if (!dayEnd)
+        public DayCycleManager dayCycleManager;
+
+
+        public float dayTime = 60;
+        public bool isSecond = true;
+        public bool dayStart = true;
+        public bool dayEnd = false;
+        void Update()
         {
-            if (dayTime > 0)
+            if (!dayEnd)
             {
-                if (dayStart)
+                if (dayTime > 0)
                 {
-                    DayStart();
-                    dayStart = false;
+                    if (dayStart)
+                    {
+                        DayStart();
+                        dayStart = false;
+                    }
+                    if (isSecond)
+                    {
+                        StartCoroutine(DayAndNight(1f));
+                        isSecond = false;
+                    }
                 }
-                if (isSecond)
+                else
                 {
-                    StartCoroutine(DayAndNight(1f));
-                    isSecond = false;
+                    dayEnd = true;
+                    DayEnd();
                 }
             }
             else
             {
-                dayEnd = true;
-                DayEnd();
+                Debug.Log("night time");
             }
         }
-        else
+        public IEnumerator DayAndNight(float delay)
         {
-            Debug.Log("night time");
+            yield return new WaitForSeconds(delay);
+            SpendTime(1f);
+            isSecond = true;
         }
-    }
-    public IEnumerator DayAndNight(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        SpendTime(1f);
-        isSecond = true;
-    }
-    public void SpendTime(float time)
-    {
-        dayTime -= time;
-        dayCycleManager.SpendTime(dayTime);
-    }
-    public void ResetTime(float time)
-    {
-        dayTime = time;
-        dayCycleManager.ResetTime(dayTime);
-    }
-    public void DayStart()
-    {
-        //Start states, workers etc. here
-        Debug.Log("Day Started");
-    }
-    public void DayEnd()
-    {
-        ResetTime(60f);
-        //Pause states, workers etc. 
-        dayCycleManager.ActivateEndDayButton();
-        //Do actions.
-        Debug.Log("Day Ended");
-        dayStart = true;
-    }
-    public void EndDayButton()
-    {
-        //Start day.
-        dayCycleManager.DeactivateEndDayButton();
-        dayEnd = false;
+        public void SpendTime(float time)
+        {
+            dayTime -= time;
+            dayCycleManager.SpendTime(dayTime);
+        }
+        public void ResetTime(float time)
+        {
+            dayTime = time;
+            dayCycleManager.ResetTime(dayTime);
+        }
+        public void DayStart()
+        {
+            //Start states, workers etc. here
+            Debug.Log("Day Started");
+        }
+        public void DayEnd()
+        {
+            ResetTime(60f);
+            //Pause states, workers etc. 
+            dayCycleManager.ActivateEndDayButton();
+            //Do actions.
+            Debug.Log("Day Ended");
+            dayStart = true;
+        }
+        public void EndDayButton()
+        {
+            //Start day.
+            dayCycleManager.DeactivateEndDayButton();
+            dayEnd = false;
+        }
     }
 }
