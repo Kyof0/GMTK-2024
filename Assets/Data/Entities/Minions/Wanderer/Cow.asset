@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93dee03eaef942b29617f1ee8c2bca8c, type: 3}
   m_Name: Cow
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 2.5
   period: 4
