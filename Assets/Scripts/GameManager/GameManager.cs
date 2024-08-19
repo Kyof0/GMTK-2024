@@ -84,7 +84,7 @@ namespace GameManager
         private void InstantiateMinion(GameObject minion)
         {
             var instance = Instantiate(minion, transform.position, Quaternion.identity);
-            var minionScript = instance.GetComponent<Miner>();
+            var minionScript = instance.GetComponent<Collector>();
             minionScript.Targets = this.targets;
             minionScript.GameManager = this;
         }
