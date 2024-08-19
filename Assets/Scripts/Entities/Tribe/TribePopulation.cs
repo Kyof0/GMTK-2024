@@ -4,16 +4,36 @@ using UnityEngine;
 
 public class Tribe : MonoBehaviour
 {
-    public int PeasantCount;
-    public int LumberjackCount;
-    public int MinerCount;
-    public int WarriorCount;
-    public int ShepherdCount;
-    public int ReverendCount;
-    public int PopulationCount;
+    public int _peasantCount;
+    public int _lumberjackCount;
+    public int _minerCount;
+    public int _warriorCount;
+    public int _shepherdCount;
+    public int _reverendCount;
+    public int _populationCount;
 
-    public int Wood;
-    public int Stone;
-    public int Iron;
-    public int Food;
+    public void PeasantCount(int amount)
+    {
+        _peasantCount += amount;
+    }
+    public void lumberjackCount(int amount)
+    {
+        _lumberjackCount += amount;
+    }
+    public void minerCount(int amount)
+    {
+        _minerCount += amount;
+    }
+    public void warriorCount(int amount)
+    {
+        _warriorCount += amount;
+    }
+    public void shepherdCount(int amount)
+    {
+        _shepherdCount += amount;
+    }
+    public void reverendCount(int amount)
+    {
+        _reverendCount += amount;
+    }
 }
