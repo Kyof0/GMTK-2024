@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameManager
 {
-    public class EmreDayCycle : MonoBehaviour
+    public class DayCycle : MonoBehaviour
     {
         public DayCycleManager dayCycleManager;
 
