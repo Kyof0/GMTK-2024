@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using GameManager;
+
 public class MinionCountManager : MonoBehaviour
 {
     #region Left Bar
