@@ -13,6 +13,8 @@ namespace Entities.People
         
         private Rigidbody2D _rb;
 
+        private Animator _anim;
+
         [NonSerialized] public GameManager.GameManager GameManager;
 
         #endregion
@@ -55,6 +57,7 @@ namespace Entities.People
         {
             _rb = GetComponent<Rigidbody2D>();
             _seeker = GetComponent<Seeker>();
+            _anim = GetComponent<Animator>();
             
             SwitchState(State.GoMining);
             
@@ -181,6 +184,8 @@ namespace Entities.People
             if (Targets.Length < 2) return;
             
             FindPath(Targets[0]);
+            
+            _anim.SetBool("move", true);
         }
 
         private void UpdateGoMining()
@@ -193,6 +198,8 @@ namespace Entities.People
         private void ExitGoMining()
         {
             _reachedDestination = false;
+            
+            _anim.SetBool("move", false);
         }
 
         #endregion
@@ -204,6 +211,8 @@ namespace Entities.People
             _startTime = Time.time;
 
             _rb.velocity = Vector2.zero;
+            
+            _anim.SetBool("mine", true);
         }
 
         private void UpdateWorkInMines()
@@ -213,7 +222,7 @@ namespace Entities.People
 
         private void ExitWorkInMines()
         {
-            
+            _anim.SetBool("mine", false);
         }
 
         #endregion
@@ -225,6 +234,8 @@ namespace Entities.People
             if (Targets.Length < 2) return;
             
             FindPath(Targets[1]);
+            
+            _anim.SetBool("move", true);
         }
 
         private void UpdateGoHome()
@@ -237,6 +248,8 @@ namespace Entities.People
         private void ExitGoHome()
         {
             _reachedDestination = false;
+            
+            _anim.SetBool("move", false);
         }
 
         #endregion
@@ -248,6 +261,8 @@ namespace Entities.People
             _startTime = Time.time;
             
             _rb.velocity = Vector2.zero;
+            
+            _anim.SetBool("empty", true);
         }
 
         private void UpdateWorkAtHome()
@@ -257,7 +272,7 @@ namespace Entities.People
 
         private void ExitWorkAtHome()
         {
-            
+            _anim.SetBool("empty", false);
         }
 
         #endregion
