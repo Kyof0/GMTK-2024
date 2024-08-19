@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c61198cd674d0a94c848fd5adaf0dead
+guid: 6eea566a048162143901b63a92a9d2a3
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: miner1_0
+      name: shepherdYellow_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5d06045a1eeb114e9d14527c5b5afc6
-      internalID: -744030046
+      spriteID: 79af0d61120c6eb4fba4983e9ddc4ede
+      internalID: -805841344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: miner1_1
+      name: shepherdYellow_1
       rect:
         serializedVersion: 2
         x: 8
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2d02ac6f2ee21914aa3417357098a17e
-      internalID: 613438749
+      spriteID: c39ada77df0d8744e968cc46f668939b
+      internalID: 1022840104
       vertices: []
       indices: 
       edges: []
@@ -175,8 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      miner1_0: -744030046
-      miner1_1: 613438749
+      shepherdYellow_0: -805841344
+      shepherdYellow_1: 1022840104
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

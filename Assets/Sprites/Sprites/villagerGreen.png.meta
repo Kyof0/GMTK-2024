@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6db543056fd84f342886bbd905fa5901
+guid: 82bd9f80b65d59d4b946b19dd3b88eb5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,7 +123,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: villager3_0
+      name: villagerGreen_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 54519b0863bfcb14f98e4b21b7e3979f
-      internalID: -1849852225
+      spriteID: bcdda67a8257528469c871c353b61944
+      internalID: -1840181380
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: villager3_1
+      name: villagerGreen_1
       rect:
         serializedVersion: 2
         x: 8
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc589f3d7c27a1841993d6577d14878c
-      internalID: 1060408182
+      spriteID: deb48a71241793340a696e600ae38a74
+      internalID: -1255021181
       vertices: []
       indices: 
       edges: []
@@ -175,8 +175,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      villager3_0: -1849852225
-      villager3_1: 1060408182
+      villagerGreen_0: -1840181380
+      villagerGreen_1: -1255021181
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
