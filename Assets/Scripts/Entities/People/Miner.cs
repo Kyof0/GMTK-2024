@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Linq;
-using OldSystem.DataScriptableObjects;
 using OldSystem.DataScriptableObjects.EntityDataScriptableObjects;
 using Pathfinding;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Entities.People
 {
@@ -16,6 +13,8 @@ namespace Entities.People
         
         private Rigidbody2D _rb;
 
+        [NonSerialized] public GameManager.GameManager GameManager;
+
         #endregion
 
         #region State Parameters
@@ -23,6 +22,8 @@ namespace Entities.People
         private State _currentState;
 
         private float _startTime;
+
+        private bool _stayHome;
 
         private enum State
         {
@@ -44,6 +45,8 @@ namespace Entities.People
 
         private bool _reachedDestination = false;
 
+        [NonSerialized] public Transform[] Targets;
+
         #endregion
         
         #region Unity Callback Functions
@@ -53,7 +56,16 @@ namespace Entities.People
             _rb = GetComponent<Rigidbody2D>();
             _seeker = GetComponent<Seeker>();
             
-            SwitchState(State.GoHome);
+            SwitchState(State.GoMining);
+            
+            GameManager.OnDawn += HandleOnDawn;
+            GameManager.OnDusk += HandleOnDusk;
+        }
+
+        private void OnDisable()
+        {
+            GameManager.OnDawn -= HandleOnDawn;
+            GameManager.OnDusk -= HandleOnDusk;
         }
 
         private void Update()
@@ -70,7 +82,7 @@ namespace Entities.People
                     UpdateGoHome();
                     break;
                 case State.WorkAtHome:
-                    UpdateWorkInMines();
+                    UpdateWorkAtHome();
                     break;
             }
         }
@@ -166,19 +178,21 @@ namespace Entities.People
 
         private void EnterGoMining()
         {
-            _startTime = Time.time;
+            if (Targets.Length < 2) return;
+            
+            FindPath(Targets[0]);
         }
 
         private void UpdateGoMining()
         {
-            _rb.velocity = Vector2.down;
+            _rb.velocity = FindDirection() * data.moveSpeed;
             
-            if (Time.time > _startTime + data.transferTime) SwitchState(State.GoHome);
+            if (_reachedDestination) SwitchState(State.WorkInMines);
         }
 
         private void ExitGoMining()
         {
-            
+            _reachedDestination = false;
         }
 
         #endregion
@@ -187,12 +201,14 @@ namespace Entities.People
 
         private void EnterWorkInMines()
         {
-            
+            _startTime = Time.time;
+
+            _rb.velocity = Vector2.zero;
         }
 
         private void UpdateWorkInMines()
         {
-            
+            if (Time.time > _startTime + data.mineTime) SwitchState(State.GoHome);
         }
 
         private void ExitWorkInMines()
@@ -206,19 +222,21 @@ namespace Entities.People
 
         private void EnterGoHome()
         {
-            _startTime = Time.time;
+            if (Targets.Length < 2) return;
+            
+            FindPath(Targets[1]);
         }
 
         private void UpdateGoHome()
         {
-            _rb.velocity = Vector2.left;
+            _rb.velocity = FindDirection() * data.moveSpeed;
             
-            if (Time.time > _startTime + data.transferTime) SwitchState(State.GoMining);
+            if (_reachedDestination) SwitchState(State.WorkAtHome);
         }
 
         private void ExitGoHome()
         {
-            
+            _reachedDestination = false;
         }
 
         #endregion
@@ -227,12 +245,14 @@ namespace Entities.People
 
         private void EnterWorkAtHome()
         {
+            _startTime = Time.time;
             
+            _rb.velocity = Vector2.zero;
         }
 
         private void UpdateWorkAtHome()
         {
-            
+            if (Time.time > _startTime + data.mineTime && !_stayHome) SwitchState(State.GoMining);
         }
 
         private void ExitWorkAtHome()
@@ -241,6 +261,24 @@ namespace Entities.People
         }
 
         #endregion
+
+        #endregion
+
+        #region Handler Functions
+
+        private void HandleOnDawn()
+        {
+            SwitchState(State.GoMining);
+
+            _stayHome = false;
+        }
+
+        private void HandleOnDusk()
+        {
+            SwitchState(State.GoHome);
+
+            _stayHome = true;
+        }
 
         #endregion
     }
