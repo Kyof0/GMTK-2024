@@ -160,7 +160,7 @@ namespace GameManager
         public void InstantiateAnimals()
         {
             var pos = Vector3.zero;
-            var tp = transform.position;
+            var tp = targets[81].position;
 
             for (int i = 0; i < 3; i++)
             {
@@ -181,6 +181,27 @@ namespace GameManager
             {
                 pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
                 Animals.Add(Instantiate(minions[4], pos,Quaternion.Euler(0f, 0f, 0f)).transform);
+            }
+            tp = targets[82].position;
+            for (int i = 0; i < 3; i++)
+            {
+                pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
+                Animals.Add(Instantiate(minions[1], pos, Quaternion.Euler(0f, 0f, 0f)).transform);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
+                Animals.Add(Instantiate(minions[2], pos, Quaternion.Euler(0f, 0f, 0f)).transform);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
+                Animals.Add(Instantiate(minions[3], pos, Quaternion.Euler(0f, 0f, 0f)).transform);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
+                Animals.Add(Instantiate(minions[4], pos, Quaternion.Euler(0f, 0f, 0f)).transform);
             }
         }
 

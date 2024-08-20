@@ -21,6 +21,7 @@ namespace GameManager
         {
             gameManager = GetComponent<GameManager>();
             tribePopulation = GetComponent<TribePopulation>();
+            gameManager.InstantiateAnimals();
         }
         void Update()
         {
