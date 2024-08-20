@@ -126,7 +126,7 @@ namespace GameManager
 
         public void InstantiateMiner()
         {
-            var instance = Instantiate(minions[8], transform.position, Quaternion.identity);
+            var instance = Instantiate(minions[8], targets[29].position, Quaternion.identity);
             var minionScript = instance.GetComponent<Collector>();
             Transform[] arr = { targets[Random.Range(0,29)], targets[29] };
             minionScript.Targets = arr;
@@ -134,7 +134,7 @@ namespace GameManager
         }
         public void InstantiateLumberjack()
         {
-            var instance = Instantiate(minions[7], transform.position, Quaternion.identity);
+            var instance = Instantiate(minions[7], targets[29].position, Quaternion.identity);
             var minionScript = instance.GetComponent<Collector>();
             Transform[] arr = { targets[Random.Range(31, 81)], targets[29] };
             minionScript.Targets = arr;
@@ -146,7 +146,7 @@ namespace GameManager
         /// </summary>
         public void InstantiateShepherd()
         {
-            var instance = Instantiate(minions[9], transform.position, Quaternion.identity);
+            var instance = Instantiate(minions[9], targets[29].position, Quaternion.identity);
             var minionScript = instance.GetComponent<Collector>();
             if (Animals.Count < 12) return;
             Transform[] arr = { Animals.ToArray()[Random.Range(0, 12)], targets[29] };
