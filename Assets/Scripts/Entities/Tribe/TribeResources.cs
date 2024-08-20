@@ -10,7 +10,12 @@ public class TribeResources : MonoBehaviour
     public int _foodCount = 0;
     public float _stamina = 0;
 
-    public ResourcesManager resourcesManager;
+
+    public TribePopulation tribe;
+    public float ResourceRegenInterval = 2f;
+    private float lastRegen;
+
+  public ResourcesManager resourcesManager;
     public void Wood(int amount)
     {
         _woodCount += amount;
@@ -45,5 +50,12 @@ public class TribeResources : MonoBehaviour
         {
             Stamina(-5f);
         }
-    }
+
+        if (Time.time - lastRegen > ResourceRegenInterval)
+        {
+            Stamina(tribe._reverendCount);
+            lastRegen = Time.time;
+        }
+  }
+
 }

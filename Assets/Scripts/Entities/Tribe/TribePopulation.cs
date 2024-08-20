@@ -43,4 +43,5 @@ public class TribePopulation : MonoBehaviour
         _reverendCount += amount;
         minionManager.SetText("r", _reverendCount);
     }
+
 }
