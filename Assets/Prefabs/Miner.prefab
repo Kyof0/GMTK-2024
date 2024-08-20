@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8872242498096522617}
   m_Layer: 0
   m_Name: Miner
-  m_TagString: Untagged
+  m_TagString: TribeMember
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,8 +100,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: e5f516694e811324bb9db26001c9572b, type: 2}
-  target1: {fileID: 0}
-  target2: {fileID: 0}
 --- !u!114 &3726186597743903778
 MonoBehaviour:
   m_ObjectHideFlags: 0

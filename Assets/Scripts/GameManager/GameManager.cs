@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Entities.People;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -28,6 +29,10 @@ namespace GameManager
         private float _lastSpawnTime;
 
         public Transform[] targets;
+
+        public HashSet<Transform> Animals;
+
+        public HashSet<Transform> EnemyTribeMembers;
         
         #endregion
         
@@ -45,6 +50,15 @@ namespace GameManager
             _lastSpawnTime = Time.time;
             
             // InstantiateMinion(miner);
+            
+            // The following part should be executed after the animals are spawned
+
+            var animals = GameObject.FindGameObjectsWithTag("Animal");
+
+            foreach (var animal in animals)
+            {
+                Animals.Add(animal.transform);
+            }
         }
 
         private void Update()
@@ -72,7 +86,13 @@ namespace GameManager
 
             if (Time.time > _lastSpawnTime + 1f)
             {
-                InstantiateMinion(miner);
+                var enemyTribeMembers = GameObject.FindGameObjectsWithTag("TribeMember");
+
+                foreach (var tribeMember in enemyTribeMembers)
+                {
+                    EnemyTribeMembers.Add(tribeMember.transform);
+                }
+                
                 _lastSpawnTime = Time.time;
             }
         }
