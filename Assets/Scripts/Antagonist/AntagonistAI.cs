@@ -1,4 +1,5 @@
 using Entities.People;
+using OldSystem.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -126,36 +127,19 @@ public abstract class AntagonistAI : MonoBehaviour {
 
   private void SpawnMinion(MinionType minion)
   {
-
-    switch (minion)
-    {
-      case MinionType.Miner:
-        // spawn enemy miner
-        InstantiateMinion(Minions[(int)MinionType.Miner]);
-        break;
-      case MinionType.Farmer:
-        // spawn enemy farmer
-        InstantiateMinion(Minions[(int)MinionType.Farmer]);
-        break;
-      case MinionType.Soldier:
-        // spawn enemy soldier
-        InstantiateMinion(Minions[(int)MinionType.Soldier]);
-        break;
-      default:
-        Debug.LogError("Attempted to spawn an unknown minion");
-        break;
-    }
+        InstantiateMinion(minion);
   }
 
-  private void InstantiateMinion(GameObject minion)
+  private void InstantiateMinion(MinionType minionType)
   {
-    if(minion != null)
+    if(Minions.Count > (int)minionType)
     {
+      var minion = Minions[(int)minionType];
       Instantiate(minion, transform.position, Quaternion.identity);
     } 
     else
     {
-      Debug.LogError("Attempted to spawn an unassigned minion");
+      Debug.Log("Attempted to spawn an unassigned minion");
     }
     // var instance = Instantiate(minion, transform.position, Quaternion.identity);
     // var minionScript = instance.GetComponent<Collector>();

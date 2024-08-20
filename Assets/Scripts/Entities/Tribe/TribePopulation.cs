@@ -36,4 +36,5 @@ public class TribePopulation : MonoBehaviour
     {
         _reverendCount += amount;
     }
+
 }

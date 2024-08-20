@@ -16,4 +16,5 @@ public class Tribe : MonoBehaviour
     public int Stone;
     public int Iron;
     public int Food;
+    public int Stamina; 
 }

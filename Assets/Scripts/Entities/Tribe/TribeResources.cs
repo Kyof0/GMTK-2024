@@ -8,4 +8,5 @@ public class TribeResources : MonoBehaviour
     public int Stone;
     public int Iron;
     public int Food;
+    public int Stamina;
 }
