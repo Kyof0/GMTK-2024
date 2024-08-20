@@ -146,14 +146,6 @@ namespace GameManager
             minionScript.Targets = arr;
             minionScript.GameManager = this;
         }
-        public void InstantiateMiner()
-        {
-            var instance = Instantiate(minions[8], transform.position, Quaternion.identity);
-            var minionScript = instance.GetComponent<Collector>();
-            Transform[] arr = { targets[UnityEngine.Random.Range(0, 30)], targets[29] };
-            minionScript.Targets = arr;
-            minionScript.GameManager = this;
-        }
 
         #endregion
     }
