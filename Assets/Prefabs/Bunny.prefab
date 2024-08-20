@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 1844181947003758393}
   - component: {fileID: 2009646465407182803}
   - component: {fileID: 2975698211149289214}
-  - component: {fileID: 1772128926761862522}
   m_Layer: 0
   m_Name: Bunny
   m_TagString: Animal
@@ -100,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d464091bf570471faf4fe6fa17769059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: b6bb19fe1e12960478f7034dfc6710ee, type: 2}
+  data: {fileID: 0}
 --- !u!50 &2009646465407182803
 Rigidbody2D:
   serializedVersion: 4
@@ -127,7 +126,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 0
 --- !u!70 &2975698211149289214
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -163,24 +162,3 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.9375, y: 0.8125}
   m_Direction: 0
---- !u!95 &1772128926761862522
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5216715759917249130}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0

@@ -35,16 +35,16 @@ namespace Entities.People
 
         private void Update()
         {
-            switch (_move)
+            if (_move)
             {
-                case true:
-                    _rb.velocity = _direction.normalized * data.moveSpeed;
-                    break;
-                case false:
-                    _rb.velocity = Vector2.zero;
+                _rb.velocity = _direction.normalized * data.moveSpeed;
+            }
+
+            if (!_move)
+            {
+                _rb.velocity = Vector2.zero;
                 
-                    _direction.Set(Random.Range(-1,2), Random.Range(-1,2));
-                    break;
+                _direction.Set(Random.Range(-1,2), Random.Range(-1,2));
             }
 
             _move = (Time.time % data.period > data.period / 2);

@@ -41,9 +41,6 @@ namespace GameManager
         public event Action OnDawn;
         public event Action OnDusk;
 
-        public event Action OnPeace;
-        public event Action OnWar;
-
         #endregion
 
         #region Unity Callback Functions
@@ -56,12 +53,12 @@ namespace GameManager
             
             // The following part should be executed after the animals are spawned
 
-            // var animals = GameObject.FindGameObjectsWithTag("Animal");
-            //
-            // foreach (var animal in animals)
-            // {
-            //     Animals.Add(animal.transform);
-            // }
+            var animals = GameObject.FindGameObjectsWithTag("Animal");
+
+            foreach (var animal in animals)
+            {
+                Animals.Add(animal.transform);
+            }
         }
 
         private void Update()
@@ -89,14 +86,12 @@ namespace GameManager
 
             if (Time.time > _lastSpawnTime + 1f)
             {
-                // The following part should be executed after the animals are spawned
-                
-                // var enemyTribeMembers = GameObject.FindGameObjectsWithTag("TribeMember");
-                //
-                // foreach (var tribeMember in enemyTribeMembers)
-                // {
-                //     EnemyTribeMembers.Add(tribeMember.transform);
-                // }
+                var enemyTribeMembers = GameObject.FindGameObjectsWithTag("TribeMember");
+
+                foreach (var tribeMember in enemyTribeMembers)
+                {
+                    EnemyTribeMembers.Add(tribeMember.transform);
+                }
                 
                 _lastSpawnTime = Time.time;
             }
