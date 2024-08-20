@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace GameManager
 {
-    public class EmreDayCycle : MonoBehaviour
+    public class DayCycle : MonoBehaviour
     {
         public DayCycleManager dayCycleManager;
 
@@ -37,7 +37,7 @@ namespace GameManager
             }
             else
             {
-                Debug.Log("night time");
+
             }
         }
         public IEnumerator DayAndNight(float delay)
@@ -72,6 +72,7 @@ namespace GameManager
         }
         public void EndDayButton()
         {
+            Debug.Log("sa");
             //Start day.
             dayCycleManager.DeactivateEndDayButton();
             dayEnd = false;

@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93dee03eaef942b29617f1ee8c2bca8c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e6904c9ecc040749956b903cea18962, type: 3}
   m_Name: Bishop
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  period: 6
+  mineTime: 0
+  transferTime: 0
+  moveSpeed: 0
