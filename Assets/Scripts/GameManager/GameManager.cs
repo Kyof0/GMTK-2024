@@ -24,7 +24,7 @@ namespace GameManager
 
         #region Spawn Parameters
 
-        public GameObject miner;
+        public GameObject[] minions;
 
         private float _lastSpawnTime;
 
@@ -106,11 +106,12 @@ namespace GameManager
 
         #region Functions
 
-        private void InstantiateMinion(GameObject minion)
+        public void InstantiateMiner()
         {
-            var instance = Instantiate(minion, transform.position, Quaternion.identity);
+            var instance = Instantiate(minions[8], transform.position, Quaternion.identity);
             var minionScript = instance.GetComponent<Collector>();
-            minionScript.Targets = this.targets;
+            Transform[] arr = { targets[29], targets[30] };
+            minionScript.Targets = arr;
             minionScript.GameManager = this;
         }
 
