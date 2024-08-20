@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Entities.People;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace GameManager
 {
@@ -126,7 +128,7 @@ namespace GameManager
         {
             var instance = Instantiate(minions[8], transform.position, Quaternion.identity);
             var minionScript = instance.GetComponent<Collector>();
-            Transform[] arr = { targets[UnityEngine.Random.Range(0,29)], targets[29] };
+            Transform[] arr = { targets[Random.Range(0,29)], targets[29] };
             minionScript.Targets = arr;
             minionScript.GameManager = this;
         }
@@ -134,17 +136,52 @@ namespace GameManager
         {
             var instance = Instantiate(minions[7], transform.position, Quaternion.identity);
             var minionScript = instance.GetComponent<Collector>();
-            Transform[] arr = { targets[UnityEngine.Random.Range(31, 81)], targets[29] };
+            Transform[] arr = { targets[Random.Range(31, 81)], targets[29] };
             minionScript.Targets = arr;
             minionScript.GameManager = this;
         }
+        
+        /// <summary>
+        /// This method should be called after InstantiateAnimals
+        /// </summary>
         public void InstantiateShepherd()
         {
-            var instance = Instantiate(minions[8], transform.position, Quaternion.identity);
+            var instance = Instantiate(minions[9], transform.position, Quaternion.identity);
             var minionScript = instance.GetComponent<Collector>();
-            Transform[] arr = { targets[UnityEngine.Random.Range(0, 30)], targets[29] };
+            if (Animals.Count < 12) return;
+            Transform[] arr = { Animals.ToArray()[Random.Range(0, 12)], targets[29] };
             minionScript.Targets = arr;
             minionScript.GameManager = this;
+        }
+
+        /// <summary>
+        /// This method should be called before InstantiateShepherd
+        /// </summary>
+        public void InstantiateAnimals()
+        {
+            var pos = Vector3.zero;
+            var tp = transform.position;
+
+            for (int i = 0; i < 3; i++)
+            {
+                pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
+                Animals.Add(Instantiate(minions[1], pos,Quaternion.Euler(0f, 0f, 0f)).transform);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
+                Animals.Add(Instantiate(minions[2], pos,Quaternion.Euler(0f, 0f, 0f)).transform);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
+                Animals.Add(Instantiate(minions[3], pos,Quaternion.Euler(0f, 0f, 0f)).transform);
+            }
+            for (int i = 0; i < 3; i++)
+            {
+                pos.Set(tp.x + Random.Range(-2, 3), tp.y + Random.Range(-2, 3), 0);
+                Animals.Add(Instantiate(minions[4], pos,Quaternion.Euler(0f, 0f, 0f)).transform);
+            }
         }
 
         #endregion
