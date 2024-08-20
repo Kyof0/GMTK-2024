@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class NewAntagonist : MonoBehaviour
 {
-  public TribePopulation Population;
-  public TribeResources Resources;
+  public AntagonistPopulation Population;
+  public AntagonistResources Resources;
 
   public float UpdateInterval = 1.0f;
   private float lastUpdate;
