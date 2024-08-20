@@ -18,44 +18,60 @@ public class MinionCountManager : MonoBehaviour
 
     public DayCycle dayCycle;
     public TribePopulation tribe;
-    public void UpdateText(string textCode, bool isNight)
+
+
+    //Only can accesed during day by AI
+    public void SetText(string textCode, int count)
+    {
+        switch (textCode)
+        {
+            case "p":
+                _peasantCountText.text = count.ToString();
+                break;
+            case "r":
+                _reverendCountText.text = count.ToString();
+                break;
+            case "w":
+                _warriorCountText.text = count.ToString();
+                break;
+            case "m":
+                _minerCountText.text = count.ToString();
+                break;
+            case "l":
+                _lumberjackCountText.text = count.ToString();
+                break;
+            case "s":
+                _shepherdCountText.text = count.ToString();
+                break;
+        }
+    }
+    //Only can accessed during night by player
+    public void UpdateText(string textCode)
     {
         switch (textCode){
             case "p":
-                _peasantCountText.text = NewText(_peasantCountText.text, true).ToString();
+                //_peasantCountText.text = NewText(_peasantCountText.text, true).ToString();
                 tribe.PeasantCount(-1);
-                _peasantCountText.color = Color.white;
-                if (isNight) _peasantCountText.color = Color.gray;
                 break;
             case "r":
-                _reverendCountText.text= NewText(_reverendCountText.text, false).ToString();
+                //_reverendCountText.text= NewText(_reverendCountText.text, false).ToString();
                 tribe.ReverendCount(1);
-                _reverendCountText.color = Color.white;
-                if (isNight) _reverendCountText.color = Color.gray;
                 break;
             case "w":
-                _warriorCountText.text= NewText(_warriorCountText.text, false).ToString();
+                //_warriorCountText.text= NewText(_warriorCountText.text, false).ToString();
                 tribe.WarriorCount(1);
-                _warriorCountText.color = Color.white;
-                if (isNight) _warriorCountText.color = Color.gray;
                 break;
             case "m":
-                _minerCountText.text= NewText(_minerCountText.text, false).ToString();
+                //_minerCountText.text= NewText(_minerCountText.text, false).ToString();
                 tribe.MinerCount(1);
-                _minerCountText.color = Color.white;
-                if (isNight) _minerCountText.color = Color.gray;
                 break;
             case "l":
-                _lumberjackCountText.text = NewText(_lumberjackCountText.text, false).ToString();
+                //_lumberjackCountText.text = NewText(_lumberjackCountText.text, false).ToString();
                 tribe.LumberjackCount(1);
-                _lumberjackCountText.color = Color.white;
-                if (isNight) _lumberjackCountText.color = Color.gray;
                 break;
             case "s":
-                _shepherdCountText.text = NewText(_shepherdCountText.text, false).ToString();
+                //_shepherdCountText.text = NewText(_shepherdCountText.text, false).ToString();
                 tribe.ShepherdCount(1);
-                _shepherdCountText.color = Color.white;
-                if (isNight) _shepherdCountText.color = Color.gray;
                 break;
         }
 
@@ -79,8 +95,8 @@ public class MinionCountManager : MonoBehaviour
         if (isNight) {
             if (Convert.ToInt32(_peasantCountText.text) > 0)
             {
-                UpdateText(textCode, isNight);
-                UpdateText("p", isNight);
+                UpdateText(textCode);
+                UpdateText("p");
             }
         }
     }
