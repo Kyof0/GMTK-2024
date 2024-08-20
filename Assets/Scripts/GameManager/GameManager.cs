@@ -44,6 +44,22 @@ namespace GameManager
         public event Action OnPeace;
         public event Action OnWar;
 
+        public void TriggerOnDawn()
+        {
+            OnDawn?.Invoke();
+        }
+        public void TriggerOnDusk()
+        {
+            OnDusk?.Invoke();
+        }
+        public void TriggerOnWar()
+        {
+            OnWar?.Invoke();
+        }
+        public void TriggerOnPeace()
+        {
+            OnPeace?.Invoke();
+        }
         #endregion
 
         #region Unity Callback Functions
@@ -81,9 +97,9 @@ namespace GameManager
                 _lit = false;
             }
 
-            if (_lit && !_litPrev) OnDawn?.Invoke();
+            //if (_lit && !_litPrev) OnDawn?.Invoke();
 
-            if (_litPrev && !_lit) OnDusk?.Invoke();
+            //if (_litPrev && !_lit) OnDusk?.Invoke();
 
             _litPrev = _lit;
 
@@ -110,7 +126,31 @@ namespace GameManager
         {
             var instance = Instantiate(minions[8], transform.position, Quaternion.identity);
             var minionScript = instance.GetComponent<Collector>();
-            Transform[] arr = { targets[29], targets[30] };
+            Transform[] arr = { targets[UnityEngine.Random.Range(0,29)], targets[29] };
+            minionScript.Targets = arr;
+            minionScript.GameManager = this;
+        }
+        public void InstantiateLumberjack()
+        {
+            var instance = Instantiate(minions[7], transform.position, Quaternion.identity);
+            var minionScript = instance.GetComponent<Collector>();
+            Transform[] arr = { targets[UnityEngine.Random.Range(31, 81)], targets[29] };
+            minionScript.Targets = arr;
+            minionScript.GameManager = this;
+        }
+        public void InstantiateShepherd()
+        {
+            var instance = Instantiate(minions[8], transform.position, Quaternion.identity);
+            var minionScript = instance.GetComponent<Collector>();
+            Transform[] arr = { targets[UnityEngine.Random.Range(0, 30)], targets[29] };
+            minionScript.Targets = arr;
+            minionScript.GameManager = this;
+        }
+        public void InstantiateMiner()
+        {
+            var instance = Instantiate(minions[8], transform.position, Quaternion.identity);
+            var minionScript = instance.GetComponent<Collector>();
+            Transform[] arr = { targets[UnityEngine.Random.Range(0, 30)], targets[29] };
             minionScript.Targets = arr;
             minionScript.GameManager = this;
         }

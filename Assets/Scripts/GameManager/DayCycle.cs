@@ -1,5 +1,6 @@
 using Entities.People;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameManager
@@ -8,11 +9,19 @@ namespace GameManager
     {
         public DayCycleManager dayCycleManager;
 
+        public GameManager gameManager;
+
+        public TribePopulation tribePopulation;
 
         public float dayTime = 60;
         public bool isSecond = true;
         public bool dayStart = true;
         public bool dayEnd = false;
+        private void Start()
+        {
+            gameManager = GetComponent<GameManager>();
+            tribePopulation = GetComponent<TribePopulation>();
+        }
         void Update()
         {
             if (!dayEnd)
@@ -59,11 +68,16 @@ namespace GameManager
         }
         public void DayStart()
         {
-            //Start states, workers etc. here
+            gameManager.TriggerOnDawn();
+            for (int i = 0; i < tribePopulation._minerCount; i++)
+            {
+                gameManager.InstantiateMiner();
+            }
             Debug.Log("Day Started");
         }
         public void DayEnd()
         {
+            gameManager.TriggerOnDusk();
             ResetTime(60f);
             //Pause states, workers etc. 
             dayCycleManager.ActivateEndDayButton();
@@ -73,6 +87,11 @@ namespace GameManager
         }
         public void EndDayButton()
         {
+            foreach (var item in GameObject.FindGameObjectsWithTag("TribeMember"))
+            {
+                Destroy(item);
+
+            };
             Debug.Log("sa");
             //Start day.
             dayCycleManager.DeactivateEndDayButton();
