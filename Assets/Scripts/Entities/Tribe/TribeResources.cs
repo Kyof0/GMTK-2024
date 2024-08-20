@@ -19,27 +19,31 @@ public class TribeResources : MonoBehaviour
     public void Wood(int amount)
     {
         _woodCount += amount;
+        //_woodCount = Mathf.Clamp(amount, 0, amount);
         resourcesManager.UpdateText("w", _woodCount);
     }
     public void Stone(int amount)
     {
         _stoneCount += amount;
+        //_stoneCount = Mathf.Clamp(amount, 0, amount);
         resourcesManager.UpdateText("s", _stoneCount);
     }
     public void Iron(int amount)
     {
         _ironCount += amount;
+        //_ironCount = Mathf.Clamp(amount, 0, amount);
         resourcesManager.UpdateText("i", _ironCount);
     }
     public void Food(int amount)
     {
         _foodCount += amount;
+        //_foodCount = Mathf.Clamp(amount, 0, amount);
         resourcesManager.UpdateText("f", _foodCount);
     }
     public void Stamina(float amount)
     {
         _stamina += amount;
-        _stamina = Mathf.Clamp(_stamina, 0, 100);
+        //_stamina = Mathf.Clamp(_stamina, 0, 100);
         resourcesManager.UpdateStamina(_stamina);
     }
     private void Update()

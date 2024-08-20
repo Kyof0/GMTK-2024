@@ -90,17 +90,25 @@ namespace GameManager
             //Do actions.
 
             //Salary of the day
-            tribeResources.Food((tribePopulation._shepherdCount) / 5);
+            tribeResources.Food((tribePopulation._shepherdCount));
             tribeResources.Wood((tribePopulation._lumberjackCount) / 2);
             tribeResources.Stone((tribePopulation._minerCount)*2 / 3);
             tribeResources.Iron((tribePopulation._minerCount)/4);
 
             //Daily Expenses
-            tribeResources.Food(-((tribePopulation._populationCount)*2));
+            tribeResources.Food(-((tribePopulation._populationCount)));
             tribeResources.Iron(-(tribePopulation._warriorCount));
             tribeResources.Stone(-((((tribePopulation._warriorCount)*2)/3) + (tribePopulation._minerCount/3)));
             tribeResources.Wood(-(tribePopulation._populationCount)/8);
-
+            while ((tribeResources._foodCount - tribePopulation._populationCount)>10)
+            {
+                tribePopulation.PeasantCount(1);
+                tribeResources.Food(-10);
+            }
+            if (tribeResources._foodCount <= 0)
+            {
+                tribePopulation.PeasantCount(-((tribePopulation._peasantCount) / 3));
+            }
             dayStart = true;
         }
         public void EndDayButton()
