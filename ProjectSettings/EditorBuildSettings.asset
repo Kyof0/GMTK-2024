@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/mainMenu/gmtk24_Law/Scenes/MainMenu.unity
+    guid: 47c142a6f3c4ec040855b7e1b3239f94
+  - enabled: 0
     path: Assets/Scripts/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/entrance.unity
+    guid: b368450b803f1cd45b5089a607fd92e4
   m_configObjects: {}
