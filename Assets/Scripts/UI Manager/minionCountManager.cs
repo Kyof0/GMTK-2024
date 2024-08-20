@@ -104,28 +104,4 @@ public class MinionCountManager : MonoBehaviour
   }
   #endregion
 
-  #region James-Calvin's quick and dirty prayer stamina 
-  // I put this in this script because it seemed the closest fit
-  // I only had time tonight for this simple implementation
-  // Here, I just increase stamina based on the number of 
-  // reverends who exist. 
-
-  // We should make a tribe management script somewhere which
-  // manages the resources. This code would be better placed in
-  // that script
-  TribeResources resources = new TribeResources();
-  public float ResourceRegenInterval = 2f;
-  private float lastRegen;
-
-  public void Update()
-  {
-    if (Time.time - lastRegen > ResourceRegenInterval)
-    {
-      resources.Stamina(tribe._reverendCount);
-      lastRegen = Time.time;
-      // If needed, other resources can go here.
-      Debug.Log(resources._stamina);
-    }
-  }
-  #endregion
 }
