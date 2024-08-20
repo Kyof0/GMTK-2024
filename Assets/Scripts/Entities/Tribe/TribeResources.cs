@@ -44,12 +44,6 @@ public class TribeResources : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A)) {
-            Stamina(5);
-        }else if (Input.GetKeyDown(KeyCode.D))
-        {
-            Stamina(-5f);
-        }
 
         if (Time.time - lastRegen > ResourceRegenInterval)
         {

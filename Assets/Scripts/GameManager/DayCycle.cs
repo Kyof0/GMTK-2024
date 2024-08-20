@@ -12,6 +12,7 @@ namespace GameManager
         public GameManager gameManager;
 
         public TribePopulation tribePopulation;
+        public TribeResources tribeResources;
 
         public float dayTime = 60;
         public bool isSecond = true;
@@ -21,6 +22,7 @@ namespace GameManager
         {
             gameManager = GetComponent<GameManager>();
             tribePopulation = GetComponent<TribePopulation>();
+            tribeResources = GetComponent<TribeResources>();
             gameManager.InstantiateAnimals();
         }
         void Update()
@@ -80,10 +82,25 @@ namespace GameManager
         {
             gameManager.TriggerOnDusk();
             ResetTime(60f);
+
             //Pause states, workers etc. 
+
             dayCycleManager.ActivateEndDayButton();
+
             //Do actions.
-            Debug.Log("Day Ended");
+
+            //Salary of the day
+            tribeResources.Food((tribePopulation._shepherdCount) / 5);
+            tribeResources.Wood((tribePopulation._lumberjackCount) / 2);
+            tribeResources.Stone((tribePopulation._minerCount)*2 / 3);
+            tribeResources.Iron((tribePopulation._minerCount)/4);
+
+            //Daily Expenses
+            tribeResources.Food(-((tribePopulation._populationCount)*2));
+            tribeResources.Iron(-(tribePopulation._warriorCount));
+            tribeResources.Stone(-((((tribePopulation._warriorCount)*2)/3) + (tribePopulation._minerCount/3)));
+            tribeResources.Wood(-(tribePopulation._populationCount)/8);
+
             dayStart = true;
         }
         public void EndDayButton()
