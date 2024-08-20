@@ -32,9 +32,9 @@ namespace GameManager
 
         public Transform[] targets;
 
-        public HashSet<Transform> Animals;
+        public HashSet<Transform> Animals = new HashSet<Transform>();
 
-        public HashSet<Transform> EnemyTribeMembers;
+        public HashSet<Transform> EnemyTribeMembers = new HashSet<Transform>();
         
         #endregion
         
